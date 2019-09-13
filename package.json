@@ -1,0 +1,25 @@
+{
+  "name": "ecommerce-site",
+  "version": "1.0.0",
+  "description": "Ecommerce site",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahallam75/ecommerce-site.git"
+  },
+  "author": "Alex Hallam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahallam75/ecommerce-site/issues"
+  },
+  "homepage": "https://github.com/ahallam75/ecommerce-site#readme",
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.0",
+    "nodemon": "^1.19.2"
+  }
+}
