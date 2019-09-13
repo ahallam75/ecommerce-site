@@ -50,8 +50,7 @@ userSchema
   });
 
 userSchema.methods = {
-  authenticate: function(plainText) {
-  return encryptPassword: function(password) {
+  encryptPassword: function(password) {
     if (!password) return "";
     try {
       return crypto
