@@ -32,7 +32,7 @@ const Menu = ({ history }) => (
           style={isActive(history, "/signup")}
           to="signup"
         >
-          signup
+          Signup
         </Link>
       </li>
     </ul>
