@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import ShowImage from "./ShowImage";
 import moment from "moment";
-import { addItem } from "./cartHelpers";
+import { addItem, updateItem, removeItem } from "./cartHelpers";
 
-const Card = ({ product, showViewProductButton = true }) => {
+const Card = ({
+  product,
+  showViewProductButton = true,
+  showAddToCartButton = true,
+  cartUpdate = false,
+  showRemoveProductButton = false
+}) => {
   const [redirect, setRedirect] = useState(false);
+  const [count, setCount] = useState(product.count);
 
   const showViewButton = showViewProductButton => {
     return (
@@ -44,11 +51,51 @@ const Card = ({ product, showViewProductButton = true }) => {
     );
   };
 
+  const showRemoveButton = showRemoveProductButton => {
+    return (
+      showRemoveProductButton && (
+        <button
+          onClick={() => removeItem(product._id)}
+          className="btn btn-outline-danger mt-2 mb-2"
+        >
+          Remove Product
+        </button>
+      )
+    );
+  };
+
   const showStock = quantity => {
     return quantity > 0 ? (
       <span className="badge badge-primary badge-pill">In Stock</span>
     ) : (
       <span className="badge badge-primary badge-pill">Out of Stock</span>
+    );
+  };
+
+  const handleChange = productId => event => {
+    setCount(event.target.value < 1 ? 1 : event.target.value);
+    if (event.target.value >= 1) {
+      updateItem(productId, event.target.value);
+    }
+  };
+
+  const showCartUpdateOptions = cartUpdate => {
+    return (
+      cartUpdate && (
+        <div>
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text">Adjust Quantity</span>
+            </div>
+            <input
+              type="number"
+              className="form-control"
+              value={count}
+              onChange={handleChange(product._id)}
+            />
+          </div>
+        </div>
+      )
     );
   };
 
@@ -69,6 +116,9 @@ const Card = ({ product, showViewProductButton = true }) => {
         {showStock(product.quantity)}
         <br />
         {showViewButton(showViewProductButton)}
+        {showAddToCart(showAddToCartButton)}
+        {showRemoveButton(showRemoveProductButton)}
+        {showCartUpdateOptions(cartUpdate)}
         <button className="btn btn-outline-warning mt-2 mb-2">
           View Product
         </button>
