@@ -59,6 +59,8 @@ const Checkout = ({ products }) => {
     );
   };
 
+  let deliveryAddress = data.address;
+
   const buy = () => {
     setData({ loading: true });
     // send the nonce to your server
@@ -84,13 +86,30 @@ const Checkout = ({ products }) => {
         processPayment(userId, token, paymentData)
           .then(response => {
             console.log(response);
-            setData({ ...data, success: response.success });
-            emptyCart(() => {
-              console.log("payment success and empty cart");
-              setData({ loading: false });
-            });
             // empty cart
             // create order
+
+            const createOrderData = {
+              products: products,
+              transaction_id: response.transaction.id,
+              amount: response.transaction.amount,
+              address: deliveryAddress
+            };
+
+            createOrder(userId, token, createOrderData)
+              .then(response => {
+                emptyCart(() => {
+                  console.log("payment success and empty cart");
+                  setData({
+                    loading: false,
+                    success: true
+                  });
+                });
+              })
+              .catch(error => {
+                console.log(error);
+                setData({ loading: false });
+              });
           })
           .catch(error => {
             console.log(error);
