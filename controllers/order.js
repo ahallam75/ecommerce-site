@@ -44,7 +44,7 @@ exports.listOrders = (req, res) => {
 };
 
 exports.getStatusValues = (req, res) => {
-  res.json(Orders.schema.path("status").enumValues);
+  res.json(Order.schema.path("status").enumValues);
 };
 
 exports.updateOrderStatus = (req, res) => {

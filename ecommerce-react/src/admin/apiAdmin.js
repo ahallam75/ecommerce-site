@@ -78,7 +78,7 @@ export const updateOrderStatus = (userId, token, orderId, status) => {
     method: "PUT",
     headers: {
       Accept: "application/json",
-      "Content-type": "application/json",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`
     },
     body: JSON.stringify({ status, orderId })
