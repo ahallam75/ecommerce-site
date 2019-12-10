@@ -18,10 +18,9 @@
   font-style: italic;
   background: #000;
 }
-
 /**
- * single product page - product name
- */
+  * single product page - product name
+  */
 
 .name {
   background: indigo;
@@ -50,8 +49,8 @@
 }
 
 /**
- * product image on card
- */
+  * product image on card
+  */
 
 .product-img {
   min-height: 100px;
@@ -68,8 +67,8 @@
 }
 
 /**
- * jumbotron animation
- */
+  * jumbotron animation
+  */
 
 .jumbotron {
   height: 180px;

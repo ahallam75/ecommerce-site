@@ -1,0 +1,1 @@
+To run app, open "ecommerce-site/ecommerce-react" in the terminal and type "npm start" (front-end). Then, open a second terminal and open "ecommerce-site/ecommerce-node" and type "npm start" (back-end).

@@ -30,7 +30,7 @@ router.get(
   getStatusValues
 );
 router.put(
-  "/order/orderId/status/:userId",
+  "/order/:orderId/status/:userId",
   requireSignin,
   isAuth,
   isAdmin,

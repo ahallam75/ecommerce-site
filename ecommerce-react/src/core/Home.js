@@ -12,6 +12,7 @@ const Home = () => {
   const loadProductsBySell = () => {
     getProducts("sold").then(data => {
       if (data.error) {
+        console.log(data.error);
         setError(data.error);
       } else {
         setProductsBySell(data);
@@ -21,6 +22,7 @@ const Home = () => {
 
   const loadProductsByArrival = () => {
     getProducts("createdAt").then(data => {
+      console.log(data);
       if (data.error) {
         setError(data.error);
       } else {
@@ -36,7 +38,7 @@ const Home = () => {
 
   return (
     <Layout
-      title="Home Page"
+      title="FullStack React Node MongoDB Ecommerce App"
       description="Node React E-commerce App"
       className="container-fluid"
     >

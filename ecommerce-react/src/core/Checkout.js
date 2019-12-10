@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Layout from "./Layout";
 import {
   getProducts,
   getBraintreeClientToken,
@@ -10,9 +9,10 @@ import { emptyCart } from "./cartHelpers";
 import Card from "./Card";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
+// import "braintree-web"; // not using this package
 import DropIn from "braintree-web-drop-in-react";
 
-const Checkout = ({ products }) => {
+const Checkout = ({ products, setRun = f => f, run = undefined }) => {
   const [data, setData] = useState({
     loading: false,
     success: false,
@@ -28,8 +28,10 @@ const Checkout = ({ products }) => {
   const getToken = (userId, token) => {
     getBraintreeClientToken(userId, token).then(data => {
       if (data.error) {
+        console.log(data.error);
         setData({ ...data, error: data.error });
       } else {
+        console.log(data);
         setData({ clientToken: data.clientToken });
       }
     });
@@ -99,6 +101,7 @@ const Checkout = ({ products }) => {
             createOrder(userId, token, createOrderData)
               .then(response => {
                 emptyCart(() => {
+                  setRun(!run); // run useEffect in parent Cart
                   console.log("payment success and empty cart");
                   setData({
                     loading: false,
@@ -126,7 +129,7 @@ const Checkout = ({ products }) => {
     <div onBlur={() => setData({ ...data, error: "" })}>
       {data.clientToken !== null && products.length > 0 ? (
         <div>
-          <div className="form-group mb-3">
+          <div className="gorm-group mb-3">
             <label className="text-muted">Delivery address:</label>
             <textarea
               onChange={handleAddress}
